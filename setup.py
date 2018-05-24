@@ -21,7 +21,7 @@ class About(object):
     URL=f'https://github.com/{AUTHOR}/{NAME}'
     DL_URL=f'{URL}/archive/{VERSION}.tar.gz'
     LICENSE='MIT'
-    DESCRIPTION='Prehashed'
+    DESCRIPTION='Prehashing keys for memory saving.'
 
 ext_modules = [
 ]

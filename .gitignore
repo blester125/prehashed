@@ -11,3 +11,5 @@ __pycache__/
 *.p
 *.npy
 */data/*
+
+benchmark/dm_stories_tokenized
