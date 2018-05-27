@@ -4,7 +4,7 @@
 
 A python dictionary that hashes keys before they are inserted to the dict. This yields substantial memory savings when the keys of a dictionary are quite large (for example long stings).
 
-### Memory Graph
+The point of this is that we can store keys that are really large (long strings) cheaply. For example when storing the documents in the tokenized Dailymail dataset the keys take up 1.018 GB while this implementation takes 10.53 MB. A small space saving (7.79 MB vs 10.53 MB) can be found using the built in `hash` function but the results of this are not shareable across runs because python changes the seed across runs.
 
 ### Collisions
 
@@ -24,7 +24,7 @@ To sum this up here is a table with some of the probabilities of your keys colli
 |`1.71x10^23` | `1 in 100` |
 |`1.42x10^24` | `1 in 2` |
 
-So unless you plan use put `171,000,000,000,000,000,000,000` keys into this dict I wouldn't worry about collisions.
+So unless you plan use put `171,000,000,000,000,000,000,000` keys into this dict or people will die if your code has bugs I wouldn't worry about collisions.
 
 There is a small chance that keys will collide. When this happens this dictionary cannot detect that and as a result these keys will overwrite each other. This is so rare that git doesn't have a mitigation strategy either.
 

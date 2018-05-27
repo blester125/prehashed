@@ -2,25 +2,18 @@ from hashlib import sha1
 from itertools import chain
 
 def sha1_fn(i):
+    """Hash the string representation with sha1.
+
+    Args:
+        hashable: An object to hash.
+
+    Returns:
+        int: The hash.
+    """
     return int(sha1(str(i).encode('utf-8')).hexdigest(), 16)
 
 class PrehashedDict(dict):
-    r"""A dictionary where the keys are hashed before they are added.
-
-    Note:
-        This hashes keys with sha1 before hand (user can provide a different
-        hash if they want). The chance of a collision is 1 in 2^64. Ignoring
-        this chance is how git compares files.
-
-    Note:
-        The point of this is that we can store keys that are really large (long
-        strings) cheaply. For example when storing the documents in the
-        tokenized Dailymail dataset (https://drive.google.com/file/d/0BzQ6rtO2VN95bndCZDdpdXJDV1U/view)
-        the keys take up 1.018 GB while this implementation takes 10.53 MB.
-
-    Note:
-        A small space saving (7.79 MB vs 10.53 MB) can be found using the built in
-        `hash` function the results of this are not shareable across runs.
+    """A dictionary where the keys are hashed before they are added.
 
     Args:
         mapping: Initial data to add to the dict. Default: ``()``
@@ -60,7 +53,7 @@ class PrehashedDict(dict):
         return super().setdefault(self._hash(k), default)
 
     def initial_add(self, k, v):
-        """Keep adding a zero width space utill it can be inserted."""
+        """Keep adding a zero width space until it can be inserted."""
         zero_width_space = '\u200B'
         k = str(k)
         while super().__contains__(self._hash(k)):
